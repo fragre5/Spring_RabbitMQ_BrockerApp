@@ -1,0 +1,51 @@
+{
+  "rabbit_version": "3.8.0",
+  "users": [
+    {
+      "name": "guest",
+      "password": "guest",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "cpp"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "cpp",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "queue1",
+      "vhost": "cpp",
+      "durable": true,
+      "auto_delete": false
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "testExchange",
+      "vhost": "cpp",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false
+    }
+  ],
+  "bindings": [
+    {
+      "source": "testExchange",
+      "vhost": "cpp",
+      "destination": "queue1",
+      "destination_type": "queue",
+      "routing_key": "testRoutingKey"
+    }
+  ]
+}
