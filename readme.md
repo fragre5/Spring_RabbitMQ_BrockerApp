@@ -1,4 +1,4 @@
-# Project Title
+# Spring application with RabbitMQ broker
 
 This is a Spring Boot application that interacts with a RabbitMQ message broker and a PostgreSQL database. 
 The application provides an endpoint for uploading and sending data to a RabbitMQ topic. 
