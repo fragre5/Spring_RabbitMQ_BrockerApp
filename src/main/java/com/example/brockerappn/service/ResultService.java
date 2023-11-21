@@ -1,7 +1,8 @@
 package com.example.brockerappn.service;
 
-import com.example.brockerappn.entity.DataMessage;
+import com.example.brockerappn.entity.VectorData;
 import com.example.brockerappn.entity.Result;
+import com.example.brockerappn.entity.VectorPair;
 import com.example.brockerappn.repository.ResultRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -28,28 +29,9 @@ public class ResultService {
         this.resultRepository = resultRepository;
     }
 
-    public void sendData(MultipartFile file) {
+    public void sendData(List<VectorPair> vectors) {
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
-            String line;
-            String title = reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                DataMessage dataMessage = DataMessage.builder()
-                        .datetime(LocalDateTime.now().toString())
-                        .title(title)
-                        .text(line)
-                        .build();
-
-                sendMessage(dataMessage);
-
-                log.info("Сообщение отправлено!");
-
-                Thread.sleep(3000);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //sendMessage(vectors)
 
     }
 
@@ -64,8 +46,8 @@ public class ResultService {
         return resultList;
     }
 
-    private void sendMessage(DataMessage message) {
-        rabbitTemplate.convertAndSend("testExchange", "testRoutingKey", message);
+    private void sendMessage(VectorData dataMessage) {
+        rabbitTemplate.convertAndSend("testExchange", "testRoutingKey", dataMessage);
     }
 
 }

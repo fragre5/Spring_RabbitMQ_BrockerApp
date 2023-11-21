@@ -4,12 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class DataMessage {
-
-    private String datetime;
-    private String title;
-    private String text;
+public class VectorData {
+    private List<VectorPair> vectors;
 }
+

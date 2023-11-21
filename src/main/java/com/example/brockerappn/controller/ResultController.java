@@ -1,12 +1,13 @@
 package com.example.brockerappn.controller;
 
 import com.example.brockerappn.entity.Result;
+import com.example.brockerappn.entity.VectorData;
+import com.example.brockerappn.entity.VectorPair;
 import com.example.brockerappn.service.ResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,14 +20,11 @@ public class ResultController {
     public ResultService resultService;
 
     @PostMapping("/data")
-    public ResponseEntity<?> sendData(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> sendData(@RequestBody VectorData vectorData) {
 
-        if (file == null || file.isEmpty()) {
-            log.error("Ошибка: файл не отправлен или пуст");
-            return ResponseEntity.badRequest().body("Файл не отправлен или пуст");
-        }
+        List<VectorPair> vectors = vectorData.getVectors();
 
-        resultService.sendData(file);
+        resultService.sendData(vectors);
 
         return ResponseEntity.ok().build();
     }
