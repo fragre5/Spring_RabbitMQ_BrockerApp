@@ -26,7 +26,7 @@ The found values are also stored in the database and can be obtained by another 
 The application accepts the request and puts it in the RabbitMQ queue. 
 The listener retrieves requests from the queue and processes them. 
 Vector API is used for processing and finding cosine similarity. 
-The key feature of the Vector API is the use of SIMD instructions to speed up computationy.
+The key feature of the Vector API is the use of SIMD instructions to speed up computation.
 
 
 ### **Run application:**
